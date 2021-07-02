@@ -1,8 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.slashLg = void 0;
-var generate_1 = require("./generate");
-function slashLg(height, width) {
-    return generate_1.generateIcon("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-slash-lg\" viewBox=\"0 0 16 16\">\n  <path d=\"M14.707 1.293a1 1 0 0 1 0 1.414l-12 12a1 1 0 0 1-1.414-1.414l12-12a1 1 0 0 1 1.414 0z\"/>\n</svg>", height, width);
-}
-exports.slashLg = slashLg;

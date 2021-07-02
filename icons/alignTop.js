@@ -1,8 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.alignTop = void 0;
-var generate_1 = require("./generate");
-function alignTop(height, width) {
-    return generate_1.generateIcon("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-align-top\" viewBox=\"0 0 16 16\">\n  <rect width=\"4\" height=\"12\" rx=\"1\" transform=\"matrix(1 0 0 -1 6 15)\"/>\n  <path d=\"M1.5 2a.5.5 0 0 1 0-1v1zm13-1a.5.5 0 0 1 0 1V1zm-13 0h13v1h-13V1z\"/>\n</svg>", height, width);
-}
-exports.alignTop = alignTop;

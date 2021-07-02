@@ -1,17 +1,15 @@
 {
     "name": "dattatable",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "description": "",
-    "main": "dist/dattatable.min.js",
+    "main": "build/index.js",
     "typings": "build/index.d.ts",
     "scripts": {
-        "all": "npm run clean && tsc && npm run icons && npm run styles && npm run build && npm run prod && npm run typings",
+        "all": "npm run clean && tsc && npm run styles && npm run build && npm run prod",
         "build": "webpack --mode=development",
         "clean": "node ./clean.js",
-        "icons": "node ./copyIcons.js",
         "prod": "webpack --mode=production",
-        "styles": "webpack --mode=production --config=webpack.styles.js",
-        "typings": "dts-bundle --configJson dts-bundle.json"
+        "styles": "webpack --mode=production --config=webpack.styles.js"
     },
     "repository": {
         "type": "git",
@@ -24,20 +22,24 @@
         "url": "https://github.com/gunjandatta/dattatable/issues"
     },
     "homepage": "https://github.com/gunjandatta/dattatable#readme",
-    "dependencies": {
-        "datatables.net": "^1.10.25",
-        "datatables.net-bs5": "^1.10.25",
-        "gd-sprest-bs": "^7.7.6",
-        "jquery": "^3.6.0",
-        "moment": "^2.29.1"
+    "peerDependencies": {
+        "datatables.net": "*",
+        "datatables.net-bs5": "*",
+        "gd-sprest-bs": "*",
+        "jquery": "*",
+        "moment": "*"
     },
     "devDependencies": {
         "@babel/core": "^7.14.6",
         "@babel/preset-env": "^7.14.7",
         "babel-loader": "^8.2.2",
         "css-loader": "^5.2.6",
-        "dts-bundle": "^0.7.3",
+        "datatables.net": "^1.10.25",
+        "datatables.net-bs5": "^1.10.25",
+        "gd-sprest-bs": "^7.7.6",
         "html-loader": "^2.1.2",
+        "jquery": "^3.6.0",
+        "moment": "^2.29.1",
         "node-sass": "^6.0.1",
         "sass-loader": "^12.1.0",
         "style-loader": "^3.0.0",

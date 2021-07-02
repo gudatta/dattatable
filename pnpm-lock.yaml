@@ -9,7 +9,6 @@ devDependencies:
   '@babel/preset-env': 7.14.7_@babel+core@7.14.6
   babel-loader: 8.2.2_7785aae013ffe1ee003b022c18d66563
   css-loader: 5.2.6_webpack@5.42.0
-  dts-bundle: 0.7.3
   html-loader: 2.1.2_webpack@5.42.0
   node-sass: 6.0.1
   sass-loader: 12.1.0_node-sass@6.0.1+webpack@5.42.0
@@ -1174,10 +1173,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
-  /@types/detect-indent/0.1.30:
-    dev: true
-    resolution:
-      integrity: sha1-3GgrtBK05lugmOcO2tc7SDP7kQ0=
   /@types/eslint-scope/3.7.0:
     dependencies:
       '@types/eslint': 7.2.13
@@ -1196,37 +1191,18 @@ packages:
     dev: true
     resolution:
       integrity: sha512-LfZwXoGUDo0C3me81HXgkBg5CTQYb6xzEl+fNmbO4JdRiSKQ8A0GD1OBBvKAIsbCUgoyAty7m99GqqMQe784ew==
-  /@types/glob/5.0.30:
-    dependencies:
-      '@types/minimatch': 3.0.4
-      '@types/node': 8.0.0
-    dev: true
-    resolution:
-      integrity: sha1-ECZAnFYlqGiQdGAoCNCCsoZ7ilE=
   /@types/json-schema/7.0.7:
     dev: true
     resolution:
       integrity: sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
-  /@types/minimatch/3.0.4:
-    dev: true
-    resolution:
-      integrity: sha512-1z8k4wzFnNjVK/tlxvrWuK5WMt6mydWWP7+zvH5eFep4oj+UkrfiJTRtjCeBXNpwaA/FYqqtb4/QS4ianFpIRA==
   /@types/minimist/1.2.1:
     dev: true
     resolution:
       integrity: sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
-  /@types/mkdirp/0.3.29:
-    dev: true
-    resolution:
-      integrity: sha1-fyrX7FX5FEgvybHsS7GuYCjUYGY=
   /@types/node/15.14.0:
     dev: true
     resolution:
       integrity: sha512-um/+/ip3QZmwLfIkWZSNtQIJNVAqrJ92OkLMeuZrjZMTAJniI7fh8N8OICyDhAJ2mzgk/fmYFo72jRr5HyZ1EQ==
-  /@types/node/8.0.0:
-    dev: true
-    resolution:
-      integrity: sha512-j2tekvJCO7j22cs+LO6i0kRPhmQ9MXaPZ55TzOc1lzkN5b6BWqq4AFjl04s1oRRQ1v5rSe+KEvnLUSTonuls/A==
   /@types/normalize-package-data/2.4.0:
     dev: true
     resolution:
@@ -1900,16 +1876,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-hMbhWbgZBP3KWaDvRM2HDTElD5o=
-  /detect-indent/0.2.0:
-    dependencies:
-      get-stdin: 0.1.0
-      minimist: 0.1.0
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    hasBin: true
-    resolution:
-      integrity: sha1-BCkUSYl5rC2fPHPk/z5od9O8krY=
   /dot-case/3.0.4:
     dependencies:
       no-case: 3.0.4
@@ -1917,22 +1883,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==
-  /dts-bundle/0.7.3:
-    dependencies:
-      '@types/detect-indent': 0.1.30
-      '@types/glob': 5.0.30
-      '@types/mkdirp': 0.3.29
-      '@types/node': 8.0.0
-      commander: 2.20.3
-      detect-indent: 0.2.0
-      glob: 6.0.4
-      mkdirp: 0.5.5
-    dev: true
-    engines:
-      node: '>= 0.10.0'
-    hasBin: true
-    resolution:
-      integrity: sha1-Nyt7tpyCB4LmOC9ABzmmnc7T1Zo=
   /ecc-jsbn/0.1.2:
     dependencies:
       jsbn: 0.1.1
@@ -2215,12 +2165,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-kWZrnVM42QCiEA2Ig1bG8zjoIMOgxWwYCEeNdwY6Tv/cOSeGpcoX4pXHfKUxNKVoArnrEr2e9srnAxxGIraS9Q==
-  /get-stdin/0.1.0:
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-WZivJKr8gC0VyCxoVlfuuLENSpE=
   /get-stdin/4.0.1:
     dev: true
     engines:
@@ -2243,16 +2187,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==
-  /glob/6.0.4:
-    dependencies:
-      inflight: 1.0.6
-      inherits: 2.0.4
-      minimatch: 3.0.4
-      once: 1.4.0
-      path-is-absolute: 1.0.1
-    dev: true
-    resolution:
-      integrity: sha1-DwiGD2oVUSey+t1PnOJLGqtuTSI=
   /glob/7.1.7:
     dependencies:
       fs.realpath: 1.0.0
@@ -2780,10 +2714,6 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-Q4r8ghd80yhO/0j1O3B2BjweX3fiHg9cdOwjJd2J76Q135c+NDxGCqdYKQ1SKBuFfgWbAUzBfvYjPUEeNgqN1A==
-  /minimist/0.1.0:
-    dev: true
-    resolution:
-      integrity: sha1-md9lelJXTCHJBXSX33QnkLK0wN4=
   /minimist/1.2.5:
     dev: true
     resolution:
@@ -2805,13 +2735,6 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-bAxsR8BVfj60DWXHE3u30oHzfl4G7khkSuPW+qvpd7jFRHm7dLxOjUk1EHACJ/hxLY8phGJ0YhYHZo7jil7Qdg==
-  /mkdirp/0.5.5:
-    dependencies:
-      minimist: 1.2.5
-    dev: true
-    hasBin: true
-    resolution:
-      integrity: sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
   /mkdirp/1.0.4:
     dev: true
     engines:
@@ -4098,7 +4021,6 @@ specifiers:
   css-loader: ^5.2.6
   datatables.net: ^1.10.25
   datatables.net-bs5: ^1.10.25
-  dts-bundle: ^0.7.3
   gd-sprest-bs: ^7.7.6
   html-loader: ^2.1.2
   jquery: ^3.6.0
