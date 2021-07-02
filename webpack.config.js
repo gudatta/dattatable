@@ -1,4 +1,3 @@
-var project = require("./package.json");
 var path = require("path");
 var TerserPlugin = require("terser-webpack-plugin");
 
@@ -8,8 +7,18 @@ module.exports = (env, argv) => {
     return {
         // Set the main source as the entry point
         entry: [
+            path.resolve(__dirname, "node_modules/gd-sprest-bs/dist/gd-sprest-bs.min.js"),
+            path.resolve(__dirname, "node_modules/jquery/dist/jquery.min.js"),
+            path.resolve(__dirname, "node_modules/moment/dist/moment.js"),
             path.resolve(__dirname, "build/index.js")
         ],
+
+        // Externals
+        externals: {
+            "gd-sprest-bs": "DattaTable.$REST",
+            "jquery": "DattaTable.$",
+            "moment": "DattaTable.moment"
+        },
 
         // Output location
         output: {
