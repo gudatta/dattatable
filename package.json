@@ -1,6 +1,6 @@
 {
     "name": "dattatable",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "",
     "main": "dist/dattatable.min.js",
     "typings": "build/index.d.ts",
