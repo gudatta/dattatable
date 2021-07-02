@@ -6,6 +6,8 @@ declare module 'dattatable' {
     export * from "dattatable/common";
     export * from "dattatable/dashboard";
     export * from "dattatable/itemForm";
+    /** Styling */
+    import "./styles";
     import { Dashboard } from "dattatable/dashboard";
     const DattaTable: {
         CanvasForm: import("./common").Canvas;

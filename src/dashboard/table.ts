@@ -4,7 +4,6 @@ import { Components } from "gd-sprest-bs";
 import * as $ from "jquery";
 import "datatables.net";
 import "datatables.net-bs5";
-import "../../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css"
 
 /**
  * Data Table
