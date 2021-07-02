@@ -10,7 +10,7 @@ import { filterSquare } from "gd-sprest-bs/build/icons/svgs/filterSquare";
     itemsEnd: Components.INavbarItem[];
     onShowFilter: Function;
     onSearch: (value: string) => void;
-    title: string;
+    title: string | HTMLElement;
 }
 
 /**

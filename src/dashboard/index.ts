@@ -19,7 +19,7 @@ export interface IDashboardProps {
         title?: string;
     }
     navigation?: {
-        title?: string;
+        title?: string | HTMLElement;
         items?: Components.INavbarItem[];
         itemsEnd?: Components.INavbarItem[];
     };
