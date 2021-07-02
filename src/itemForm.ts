@@ -4,9 +4,12 @@ import { CanvasForm, LoadingDialog } from "./common";
 /**
  * Item Form
  */
-export class Form {
+class _ItemForm {
     private _displayForm: Components.IListFormDisplay = null;
     private _editForm: Components.IListFormEdit = null;
+    private _onCreateEditForm: (props: Components.IListFormEditProps) => Components.IListFormEditProps;
+    private _onCreateViewForm: (props: Components.IListFormDisplayProps) => Components.IListFormDisplayProps;
+    private _onSave: (values: any) => any;
     private _updateEvent: Function = null;
 
     // The current form being displayed
@@ -20,30 +23,46 @@ export class Form {
     /** Public Methods */
 
     // Creates a new task
-    create(onUpdate?: Function) {
-        // Set the update event
-        this._updateEvent = onUpdate;
+    create(props?: {
+        onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps,
+        onSave: (values: any) => any,
+        onUpdate?: (item: any) => any
+    }) {
+        // Set the events
+        this._onCreateEditForm = props.onCreateEditForm;
+        this._onSave = props.onSave;
+        this._updateEvent = props.onUpdate;
 
         // Load the item
         this.load(SPTypes.ControlMode.New);
     }
 
     // Edits a task
-    edit(itemId: number, onUpdate?: () => void) {
-        // Set the update event
-        this._updateEvent = onUpdate;
+    edit(props: {
+        itemId: number,
+        onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps,
+        onSave: (values: any) => any,
+        onUpdate?: (item: any) => any
+    }) {
+        // Set the events
+        this._onCreateEditForm = props.onCreateEditForm;
+        this._onSave = props.onSave;
+        this._updateEvent = props.onUpdate;
 
         // Load the form
-        this.load(SPTypes.ControlMode.Edit, itemId);
+        this.load(SPTypes.ControlMode.Edit, props.itemId);
     }
 
     // Views the task
-    view(itemId: number, onUpdate?: () => void) {
-        // Set the update event
-        this._updateEvent = onUpdate;
+    view(props: {
+        itemId: number,
+        onCreateViewForm?: (props: Components.IListFormDisplayProps) => Components.IListFormDisplayProps
+    }) {
+        // Set the events
+        this._onCreateViewForm = props.onCreateViewForm;
 
         // Load the form
-        this.load(SPTypes.ControlMode.Display, itemId);
+        this.load(SPTypes.ControlMode.Display, props.itemId);
     }
 
     /** Private Methods */
@@ -69,25 +88,34 @@ export class Form {
 
             // Render the form based on the type
             if (mode == SPTypes.ControlMode.Display) {
-                // Render the display form
-                this._displayForm = Components.ListForm.renderDisplayForm({
+                let props: Components.IListFormDisplayProps = {
                     info,
                     rowClassName: "mb-3"
-                });
+                };
+
+                // Call the event if it exists
+                props = this._onCreateViewForm ? this._onCreateViewForm(props) : props;
+
+                // Render the display form
+                this._displayForm = Components.ListForm.renderDisplayForm(props);
 
                 // Update the body
                 CanvasForm.setBody(this._displayForm.el);
             } else {
                 let isNew = mode == SPTypes.ControlMode.New;
                 let el = document.createElement("div");
-
-                // Render the edit form
-                this._editForm = Components.ListForm.renderEditForm({
+                let props: Components.IListFormEditProps = {
                     el,
                     info,
                     rowClassName: "mb-3",
                     controlMode: isNew ? SPTypes.ControlMode.New : SPTypes.ControlMode.Edit
-                });
+                };
+
+                // Call the event if it exists
+                props = this._onCreateEditForm ? this._onCreateEditForm(props) : props;
+
+                // Render the edit form
+                this._editForm = Components.ListForm.renderEditForm(props);
 
                 // Render the save button
                 let elButton = document.createElement("div");
@@ -98,7 +126,7 @@ export class Form {
                     el: elButton,
                     text: isNew ? "Create" : "Update",
                     type: Components.ButtonTypes.OutlineSuccess,
-                    onClick: () => { this.save(this._editForm, isNew); }
+                    onClick: () => { this.save(this._editForm, info, isNew); }
                 });
 
                 // Update the body
@@ -114,7 +142,7 @@ export class Form {
     }
 
     // Saves the form
-    private save(form: Components.IListFormEdit, isNew: boolean) {
+    private save(form: Components.IListFormEdit, info: Helper.IListFormResult, isNew: boolean) {
         // Display a loading dialog
         LoadingDialog.setHeader("Saving the Item");
         LoadingDialog.setBody("Validating the form...");
@@ -125,10 +153,14 @@ export class Form {
             // Update the title
             LoadingDialog.setBody((isNew ? "Creating" : "Updating") + " the Item");
 
+            // Call the save event
+            let values = form.getValues();
+            values = this._onSave ? this._onSave(values) : values;
+
             // Save the item
-            form.save().then(item => {
+            Components.ListForm.saveItem(info, values).then(item => {
                 // Call the update event
-                this._updateEvent ? this._updateEvent() : null;
+                this._updateEvent ? this._updateEvent(item) : null;
 
                 // Close the dialogs
                 CanvasForm.hide();
@@ -140,4 +172,4 @@ export class Form {
         }
     }
 }
-export const ItemForm = new Form();
+export const ItemForm = new _ItemForm();

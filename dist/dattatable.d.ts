@@ -62,16 +62,29 @@ declare module 'dattatable/itemForm' {
     /**
       * Item Form
       */
-    export class Form {
+    class _ItemForm {
         get form(): Components.IListFormDisplay | Components.IListFormEdit;
         get ListName(): string;
         set ListName(value: string);
         /** Public Methods */
-        create(onUpdate?: Function): void;
-        edit(itemId: number, onUpdate?: () => void): void;
-        view(itemId: number, onUpdate?: () => void): void;
+        create(props?: {
+            onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps;
+            onSave: (values: any) => any;
+            onUpdate?: (item: any) => any;
+        }): void;
+        edit(props: {
+            itemId: number;
+            onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps;
+            onSave: (values: any) => any;
+            onUpdate?: (item: any) => any;
+        }): void;
+        view(props: {
+            itemId: number;
+            onCreateViewForm?: (props: Components.IListFormDisplayProps) => Components.IListFormDisplayProps;
+        }): void;
     }
-    export const ItemForm: Form;
+    export const ItemForm: _ItemForm;
+    export {};
 }
 
 declare module 'dattatable/common/canvas' {
