@@ -1,0 +1,5 @@
+{
+    "out": "../dist/dattatable.d.ts",
+    "name": "dattatable",
+    "main": "./build/index.d.ts"
+}
