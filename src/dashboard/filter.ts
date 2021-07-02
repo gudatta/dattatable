@@ -79,6 +79,7 @@ export class FilterSlideout {
                 this._cbs.push(Components.CheckboxGroup({
                     el,
                     items,
+                    type: Components.CheckboxGroupTypes.Switch,
                     onChange: (item: Components.ICheckboxGroupItem) => {
                         // Execute the event
                         onFilter(item ? item.label : "");
