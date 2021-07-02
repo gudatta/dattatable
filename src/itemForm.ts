@@ -26,7 +26,7 @@ class _ItemForm {
     create(props?: {
         onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps,
         onSave?: (values: any) => any,
-        onUpdate?: (item: any) => any
+        onUpdate?: (item?: any) => any
     }) {
         // Set the events
         this._onCreateEditForm = props.onCreateEditForm;
@@ -42,7 +42,7 @@ class _ItemForm {
         itemId: number,
         onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps,
         onSave?: (values: any) => any,
-        onUpdate?: (item: any) => any
+        onUpdate?: (item?: any) => any
     }) {
         // Set the events
         this._onCreateEditForm = props.onCreateEditForm;
