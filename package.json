@@ -1,13 +1,14 @@
 {
     "name": "dattatable",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "",
-    "main": "build/index.js",
+    "main": "dist/dattatable.min.js",
     "typings": "build/index.d.ts",
     "scripts": {
-        "all": "npm run clean && tsc && npm run styles && npm run build && npm run prod && npm run typings",
-        "clean": "node ./clean.js",
+        "all": "npm run clean && tsc && npm run icons && npm run styles && npm run build && npm run prod && npm run typings",
         "build": "webpack --mode=development",
+        "clean": "node ./clean.js",
+        "icons": "node ./copyIcons.js",
         "prod": "webpack --mode=production",
         "styles": "webpack --mode=production --config=webpack.styles.js",
         "typings": "dts-bundle --configJson dts-bundle.json"
