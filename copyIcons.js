@@ -28,8 +28,11 @@ function copyDirectory(src, target, appendFl) {
             } else {
                 // Ensure we don't overwrite files
                 if (appendFl != true || fs.existsSync(targetPath) == false) {
-                    // Copy the file
-                    fs.copyFileSync(srcPath, targetPath);
+                    // Read the file
+                    var contents = fs.readFileSync(srcPath, "utf8");
+
+                    // Write the file
+                    fs.writeFileSync(targetPath, contents.replace("../generate", "./generate"), "utf8");
                 }
             }
         });
@@ -39,5 +42,8 @@ function copyDirectory(src, target, appendFl) {
 // Log
 console.log("Copying the icons...");
 
-// Copy the typings
+// Copy the icons
 copyDirectory("./node_modules/gd-sprest-bs/build/icons/svgs", "./icons");
+
+// Copy the generate file
+fs.copyFileSync("./node_modules/gd-sprest-bs/build/icons/generate.js", "./icons/generate.js");
