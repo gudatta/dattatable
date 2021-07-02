@@ -69,13 +69,13 @@ declare module 'dattatable/itemForm' {
         /** Public Methods */
         create(props?: {
             onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps;
-            onSave: (values: any) => any;
+            onSave?: (values: any) => any;
             onUpdate?: (item: any) => any;
         }): void;
         edit(props: {
             itemId: number;
             onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps;
-            onSave: (values: any) => any;
+            onSave?: (values: any) => any;
             onUpdate?: (item: any) => any;
         }): void;
         view(props: {
