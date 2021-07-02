@@ -3,6 +3,7 @@ import * as moment from "moment";
 /** Libraries */
 
 export * from "./canvas";
+export * from "./loadingDialog";
 export * from "./modal";
 
 /** Methods */

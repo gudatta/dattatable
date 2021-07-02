@@ -3,7 +3,7 @@ import { Components } from "gd-sprest-bs";
 /**
  * Loading Dialog
  */
-class _LoadingDialog {
+export class LoadingDialogModal {
     private _el: HTMLElement = null;
     private _elBody: HTMLElement = null;
     private _elBackdrop: HTMLElement = null;
@@ -131,4 +131,4 @@ class _LoadingDialog {
         this._elBackdrop.style.display = "";
     }
 }
-export const LoadingDialog = new _LoadingDialog();
+export const LoadingDialog = new LoadingDialogModal();

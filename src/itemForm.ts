@@ -1,5 +1,5 @@
 import { Components, Helper, SPTypes } from "gd-sprest-bs";
-import { CanvasForm } from "./common";
+import { CanvasForm, LoadingDialog } from "./common";
 
 /**
  * Item Form
@@ -55,81 +55,88 @@ export class Form {
         this._editForm = null;
 
         // Show a loading dialog
-        Helper.SP.ModalDialog.showWaitScreenWithNoClose("Loading the Item").then(dlg => {
-            // Load the form information
-            Helper.ListForm.create({
-                listName: this.ListName,
-                itemId
-            }).then(info => {
-                // Set the header
-                CanvasForm.setHeader("<h5>" + (info.item ? info.item.Title : "Create Item") + "</h5>");
+        LoadingDialog.setHeader("Loading the Item");
+        LoadingDialog.setBody("This will close after the form is loaded...");
+        LoadingDialog.show();
 
-                // Render the form based on the type
-                if (mode == SPTypes.ControlMode.Display) {
-                    // Render the display form
-                    this._displayForm = Components.ListForm.renderDisplayForm({
-                        info,
-                        rowClassName: "mb-3"
-                    });
+        // Load the form information
+        Helper.ListForm.create({
+            listName: this.ListName,
+            itemId
+        }).then(info => {
+            // Set the header
+            CanvasForm.setHeader("<h5>" + (info.item ? info.item.Title : "Create Item") + "</h5>");
 
-                    // Update the body
-                    CanvasForm.setBody(this._displayForm.el);
-                } else {
-                    let isNew = mode == SPTypes.ControlMode.New;
-                    let el = document.createElement("div");
+            // Render the form based on the type
+            if (mode == SPTypes.ControlMode.Display) {
+                // Render the display form
+                this._displayForm = Components.ListForm.renderDisplayForm({
+                    info,
+                    rowClassName: "mb-3"
+                });
 
-                    // Render the edit form
-                    this._editForm = Components.ListForm.renderEditForm({
-                        el,
-                        info,
-                        rowClassName: "mb-3",
-                        controlMode: isNew ? SPTypes.ControlMode.New : SPTypes.ControlMode.Edit
-                    });
+                // Update the body
+                CanvasForm.setBody(this._displayForm.el);
+            } else {
+                let isNew = mode == SPTypes.ControlMode.New;
+                let el = document.createElement("div");
 
-                    // Render the save button
-                    let elButton = document.createElement("div");
-                    elButton.classList.add("float-end");
-                    elButton.classList.add("mt-3");
-                    el.appendChild(elButton);
-                    Components.Button({
-                        el: elButton,
-                        text: isNew ? "Create" : "Update",
-                        type: Components.ButtonTypes.OutlineSuccess,
-                        onClick: () => { this.save(this._editForm, isNew); }
-                    });
+                // Render the edit form
+                this._editForm = Components.ListForm.renderEditForm({
+                    el,
+                    info,
+                    rowClassName: "mb-3",
+                    controlMode: isNew ? SPTypes.ControlMode.New : SPTypes.ControlMode.Edit
+                });
 
-                    // Update the body
-                    CanvasForm.setBody(el);
-                }
+                // Render the save button
+                let elButton = document.createElement("div");
+                elButton.classList.add("float-end");
+                elButton.classList.add("mt-3");
+                el.appendChild(elButton);
+                Components.Button({
+                    el: elButton,
+                    text: isNew ? "Create" : "Update",
+                    type: Components.ButtonTypes.OutlineSuccess,
+                    onClick: () => { this.save(this._editForm, isNew); }
+                });
 
-                // Close the dialog
-                dlg.close();
+                // Update the body
+                CanvasForm.setBody(el);
+            }
 
-                // Show the form
-                CanvasForm.show();
-            });
+            // Close the dialog
+            LoadingDialog.hide();
+
+            // Show the form
+            CanvasForm.show();
         });
     }
 
     // Saves the form
     private save(form: Components.IListFormEdit, isNew: boolean) {
+        // Display a loading dialog
+        LoadingDialog.setHeader("Saving the Item");
+        LoadingDialog.setBody("Validating the form...");
+        LoadingDialog.show();
+
         // Validate the form
         if (form.isValid()) {
-            // Display a loading dialog
-            Helper.SP.ModalDialog.showWaitScreenWithNoClose("Validating the Form").then(dlg => {
-                // Update the title
-                dlg.setTitle((isNew ? "Creating" : "Updating") + " the Item");
+            // Update the title
+            LoadingDialog.setBody((isNew ? "Creating" : "Updating") + " the Item");
 
-                // Save the item
-                form.save().then(item => {
-                    // Call the update event
-                    this._updateEvent ? this._updateEvent() : null;
+            // Save the item
+            form.save().then(item => {
+                // Call the update event
+                this._updateEvent ? this._updateEvent() : null;
 
-                    // Close the dialogs
-                    dlg.close();
-                    CanvasForm.hide();
-                });
+                // Close the dialogs
+                CanvasForm.hide();
+                LoadingDialog.hide();
             });
+        } else {
+            // Close the dialog
+            LoadingDialog.hide();
         }
     }
 }

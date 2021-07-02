@@ -8,19 +8,12 @@ declare module 'dattatable' {
     export * from "dattatable/itemForm";
     /** Styling */
     import "./styles";
-    import { Dashboard } from "dattatable/dashboard";
-    const DattaTable: {
-        CanvasForm: import("./common").Canvas;
-        Dashboard: typeof Dashboard;
-        ItemForm: import("./itemForm").Form;
-        Modal: import("./common").ModalDialog;
-    };
-    export default DattaTable;
 }
 
 declare module 'dattatable/common' {
     /** Libraries */
     export * from "dattatable/common/canvas";
+    export * from "dattatable/common/loadingDialog";
     export * from "dattatable/common/modal";
     /** Methods */
     export const formatDateValue: (value: string) => string;
@@ -83,7 +76,7 @@ declare module 'dattatable/common/canvas' {
     /**
       * Canvas Form
       */
-    export class Canvas {
+    class _CanvasForm {
         constructor();
         get el(): HTMLElement;
         hide(): void;
@@ -92,14 +85,30 @@ declare module 'dattatable/common/canvas' {
         setType(type: any): void;
         show(): void;
     }
-    export const CanvasForm: Canvas;
+    export const CanvasForm: _CanvasForm;
+    export {};
+}
+
+declare module 'dattatable/common/loadingDialog' {
+    /**
+      * Loading Dialog
+      */
+    export class LoadingDialogModal {
+        constructor();
+        get el(): HTMLElement;
+        hide(): void;
+        setBody(content: any): void;
+        setHeader(content: any): void;
+        show(): void;
+    }
+    export const LoadingDialog: LoadingDialogModal;
 }
 
 declare module 'dattatable/common/modal' {
     /**
       * Modal
       */
-    export class ModalDialog {
+    class _Modal {
         constructor();
         hide(): void;
         setBody(content: any): void;
@@ -109,7 +118,8 @@ declare module 'dattatable/common/modal' {
         setType(type: any): void;
         show(): void;
     }
-    export const Modal: ModalDialog;
+    export const Modal: _Modal;
+    export {};
 }
 
 declare module 'dattatable/dashboard/filter' {

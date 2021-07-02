@@ -3,7 +3,7 @@ import { Components } from "gd-sprest-bs";
 /**
  * Canvas Form
  */
-export class Canvas {
+class _CanvasForm {
     private _canvas: Components.IOffcanvas = null;
     private _elBody: HTMLElement = null;
     private _elHeader: HTMLElement = null;
@@ -84,4 +84,4 @@ export class Canvas {
     // Shows the canvas
     show() { this._canvas.show(); }
 }
-export const CanvasForm = new Canvas();
+export const CanvasForm = new _CanvasForm();
