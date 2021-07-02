@@ -8,7 +8,7 @@ module.exports = (env, argv) => {
     return {
         // Set the main source as the entry point
         entry: [
-            path.resolve(__dirname, "build/index.js")
+            path.resolve(__dirname, project.main)
         ],
 
         // Output location

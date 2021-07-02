@@ -1,8 +1,8 @@
 {
     "name": "dattatable",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "",
-    "main": "dist/dattatable.min.js",
+    "main": "build/index.js",
     "typings": "build/index.d.ts",
     "scripts": {
         "all": "npm run clean && tsc && npm run build && npm run prod && npm run typings",
