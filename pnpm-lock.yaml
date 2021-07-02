@@ -1,7 +1,7 @@
 dependencies:
   datatables.net: 1.10.25
   datatables.net-bs5: 1.10.25
-  gd-sprest-bs: 7.7.5
+  gd-sprest-bs: 7.7.6
   jquery: 3.6.0
   moment: 2.29.1
 devDependencies:
@@ -2176,7 +2176,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-6Hs29CwJh46ih1PMF9l9v0GKh1gfk2d2wJ+76mDTDfpiyqqUOq2t6y3Ld7QzIqH4i8f3VXChM+XcYNt1VJfKZw==
-  /gd-sprest-bs/7.7.5:
+  /gd-sprest-bs/7.7.6:
     dependencies:
       flatpickr: 4.6.9
       gd-bs: 4.6.4
@@ -2184,7 +2184,7 @@ packages:
       gd-sprest-def: 1.0.2
     dev: false
     resolution:
-      integrity: sha512-d0qW3uau9xd3+OMWcPyxwLOB987mlLuWIElgJyb2wu2cahV+2610oAetUNr/rVtfPaUWojOaOquVadbUZh5kIw==
+      integrity: sha512-UToJ9LVvORKLQSYZe41QQdRr11I0nxqS3piJoWtHlrK9tuHYTjm+cqVtSVdMsZiycuXJW5XHUH6tgx4QF4ro7w==
   /gd-sprest-def/1.0.2:
     dev: false
     resolution:
@@ -4099,7 +4099,7 @@ specifiers:
   datatables.net: ^1.10.25
   datatables.net-bs5: ^1.10.25
   dts-bundle: ^0.7.3
-  gd-sprest-bs: ^7.7.5
+  gd-sprest-bs: ^7.7.6
   html-loader: ^2.1.2
   jquery: ^3.6.0
   moment: ^2.29.1
