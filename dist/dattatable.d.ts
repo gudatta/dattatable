@@ -25,6 +25,7 @@ declare module 'dattatable/dashboard' {
     import { IFilterItem } from "dattatable/dashboard/filter";
     export interface IDashboardProps {
             columns: Components.ITableColumn[];
+            dtProps?: any;
             el: HTMLElement;
             footer?: {
                     items?: Components.INavbarItem[];
@@ -39,6 +40,7 @@ declare module 'dattatable/dashboard' {
                     items?: Components.INavbarItem[];
                     itemsEnd?: Components.INavbarItem[];
             };
+            onRender?: (dt: any) => void;
             rows?: any[];
     }
     /**
