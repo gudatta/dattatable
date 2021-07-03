@@ -9,6 +9,7 @@ import "datatables.net-bs5";
  * Data Table
  */
 export interface IDataTable {
+    datatable: any;
     filter: (idx: number, value?: string) => void;
     refresh: (rows: any[]) => void;
     search: (value?: string) => void;
@@ -51,6 +52,9 @@ export class DataTable implements IDataTable {
     }
 
     /** Public Interface */
+
+    // Datatables.net object
+    get datatable(): any { return this._datatable; }
 
     // Filters the status
     filter(idx: number, value: string = "") {
