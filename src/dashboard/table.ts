@@ -68,23 +68,22 @@ export class DataTable implements IDataTable {
         if (this._datatable != null) {
             // Clear the datatable
             this._datatable.clear();
-
-            // Add the rows
-            rows ? this._datatable.add(rows) : null;
-
-            // Redraw the table
-            this._datatable.draw();
-        } else {
-            // Render the data table
-            let table = Components.Table({
-                el: this._props.el,
-                rows,
-                columns: this._props.columns
-            });
-
-            // Apply the plugin
-            this.applyPlugin(table);
+            this._datatable.destroy();
+            this._datatable = null;
         }
+
+        // Clear the datatable element
+        while (this._props.el.firstChild) { this._props.el.removeChild(this._props.el.firstChild); }
+
+        // Render the data table
+        let table = Components.Table({
+            el: this._props.el,
+            rows,
+            columns: this._props.columns
+        });
+
+        // Apply the plugin
+        this.applyPlugin(table);
     }
 
     // Searches the datatable
