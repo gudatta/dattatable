@@ -5,6 +5,13 @@ import { Header } from "./header";
 import { Navigation } from "./navigation";
 import { DataTable, IDataTable } from "./table";
 
+// Export the components
+export * from "./filter";
+export * from "./footer";
+export * from "./header";
+export * from "./navigation";
+export * from "./table";
+
 // Dashboard
 export interface IDashboardProps {
     columns: Components.ITableColumn[];
