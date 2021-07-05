@@ -4,8 +4,9 @@ import { filterSquare } from "gd-sprest-bs/build/icons/svgs/filterSquare";
 /**
  * Navigation
  */
- interface INavProps {
+interface INavProps {
     el: HTMLElement;
+    hideFilter?: boolean;
     items: Components.INavbarItem[];
     itemsEnd: Components.INavbarItem[];
     onShowFilter: Function;
@@ -44,14 +45,17 @@ export class Navigation {
             }
         });
 
-        // Render the filter icon
-        let icon = document.createElement("div");
-        icon.classList.add("filter-icon");
-        icon.classList.add("nav-link");
-        icon.classList.add("text-dark");
-        icon.style.cursor = "pointer";
-        icon.appendChild(filterSquare());
-        icon.addEventListener("click", this._props.onShowFilter as any);
-        nav.el.firstElementChild.appendChild(icon);
+        // See if we are showing the filter
+        if (this._props.hideFilter != true) {
+            // Render the filter icon
+            let icon = document.createElement("div");
+            icon.classList.add("filter-icon");
+            icon.classList.add("nav-link");
+            icon.classList.add("text-dark");
+            icon.style.cursor = "pointer";
+            icon.appendChild(filterSquare());
+            icon.addEventListener("click", this._props.onShowFilter as any);
+            nav.el.firstElementChild.appendChild(icon);
+        }
     }
 }

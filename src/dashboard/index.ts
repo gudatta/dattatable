@@ -24,7 +24,11 @@ export interface IDashboardProps {
     filters?: IFilterItem[];
     header?: {
         title?: string;
-    }
+    },
+    hideFilter?: boolean;
+    hideFooter?: boolean;
+    hideHeader?: boolean;
+    hideNavigation?: boolean;
     navigation?: {
         title?: string | HTMLElement;
         items?: Components.INavbarItem[];
@@ -72,29 +76,42 @@ export class Dashboard {
             </div>
         </div>`;
 
-        // Render the header
-        let header = this._props.header || {};
-        new Header({
-            el: this._props.el.querySelector("#header"),
-            title: header.title
-        });
+        // See if we are hiding the header
+        if (this._props.hideHeader) {
+            // Hide the element
+            this._props.el.querySelector("#header").classList.add("d-none");
+        } else {
+            // Render the header
+            let header = this._props.header || {};
+            new Header({
+                el: this._props.el.querySelector("#header"),
+                title: header.title
+            });
+        }
 
-        // Render the navigation
-        let navigation = this._props.navigation || {};
-        new Navigation({
-            el: this._props.el.querySelector("#navigation"),
-            items: navigation.items,
-            itemsEnd: navigation.itemsEnd,
-            title: navigation.title,
-            onSearch: value => {
-                // Search the data table
-                this._dt.search(value);
-            },
-            onShowFilter: () => {
-                // Show the filter
-                filters.show();
-            },
-        });
+        // See if we are hiding the navigation
+        if (this._props.hideNavigation) {
+            // Hide the element
+            this._props.el.querySelector("#navigation").classList.add("d-none");
+        } else {
+            // Render the navigation
+            let navigation = this._props.navigation || {};
+            new Navigation({
+                el: this._props.el.querySelector("#navigation"),
+                hideFilter: this._props.hideFilter,
+                items: navigation.items,
+                itemsEnd: navigation.itemsEnd,
+                title: navigation.title,
+                onSearch: value => {
+                    // Search the data table
+                    this._dt.search(value);
+                },
+                onShowFilter: () => {
+                    // Show the filter
+                    filters.show();
+                },
+            });
+        }
 
         // Render the data table
         this._dt = new DataTable({
@@ -105,13 +122,19 @@ export class Dashboard {
             rows: this._props.rows
         });
 
-        // Render the footer
-        let footer = this._props.footer || {};
-        new Footer({
-            el: this._props.el.querySelector("#footer"),
-            items: footer.items,
-            itemsEnd: footer.itemsEnd
-        });
+        // See if we are hiding the footer
+        if (this._props.hideFooter) {
+            // Hide the element
+            this._props.el.querySelector("#footer").classList.add("d-none");
+        } else {
+            // Render the footer
+            let footer = this._props.footer || {};
+            new Footer({
+                el: this._props.el.querySelector("#footer"),
+                items: footer.items,
+                itemsEnd: footer.itemsEnd
+            });
+        }
     }
 
     /**
