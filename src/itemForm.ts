@@ -38,7 +38,7 @@ class _ItemForm {
         this._onCreateEditForm = props.onCreateEditForm;
         this._onSave = props.onSave;
         this._updateEvent = props.onUpdate;
-        this._useModal = typeof (props.useModal) === "boolean" ? props.useModal : false;
+        typeof (props.useModal) === "boolean" ? this._useModal = props.useModal : false;
 
         // Load the item
         this.load(SPTypes.ControlMode.New);
@@ -56,7 +56,7 @@ class _ItemForm {
         this._onCreateEditForm = props.onCreateEditForm;
         this._onSave = props.onSave;
         this._updateEvent = props.onUpdate;
-        this._useModal = typeof (props.useModal) === "boolean" ? props.useModal : false;
+        typeof (props.useModal) === "boolean" ? this._useModal = props.useModal : false;
 
         // Load the form
         this.load(SPTypes.ControlMode.Edit, props.itemId);
@@ -70,7 +70,7 @@ class _ItemForm {
     }) {
         // Set the properties
         this._onCreateViewForm = props.onCreateViewForm;
-        this._useModal = typeof (props.useModal) === "boolean" ? props.useModal : false;
+        typeof (props.useModal) === "boolean" ? this._useModal = props.useModal : false;
 
         // Load the form
         this.load(SPTypes.ControlMode.Display, props.itemId);
