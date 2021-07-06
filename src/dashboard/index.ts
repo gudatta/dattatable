@@ -1,4 +1,5 @@
 import { Components } from "gd-sprest-bs";
+import { ItemForm } from "../itemForm";
 import { FilterSlideout, IFilterItem } from "./filter";
 import { Footer } from "./footer";
 import { Header } from "./header";
@@ -50,6 +51,9 @@ export class Dashboard {
     constructor(props: IDashboardProps) {
         // Set the properties
         this._props = props;
+
+        // Set the flag
+        typeof (props.useModal) === "boolean" ? ItemForm.UseModal = props.useModal : null;
 
         // Render the dashboard
         this.render();

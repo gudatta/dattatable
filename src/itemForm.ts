@@ -11,7 +11,6 @@ class _ItemForm {
     private _onCreateViewForm: (props: Components.IListFormDisplayProps) => Components.IListFormDisplayProps;
     private _onSave: (values: any) => any;
     private _updateEvent: Function = null;
-    private _useModal: boolean = false;
 
     // The current form being displayed
     get form(): Components.IListFormDisplay | Components.IListFormEdit { return this._displayForm || this._editForm; }
@@ -20,6 +19,11 @@ class _ItemForm {
     private _listName: string = null;
     get ListName(): string { return this._listName; }
     set ListName(value: string) { this._listName = value; }
+
+    // Flag to use a modal or canvas (default)
+    private _useModal: boolean = false;
+    get UseModal(): boolean { return this._useModal; }
+    set UseModal(value: boolean) { this._useModal = value; }
 
     /** Public Methods */
 
