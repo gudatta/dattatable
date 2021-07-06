@@ -36,6 +36,7 @@ export interface IDashboardProps {
     };
     onRender?: (dt: any) => void;
     rows?: any[];
+    useModal?: boolean;
 }
 
 /**

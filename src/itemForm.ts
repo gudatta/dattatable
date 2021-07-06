@@ -1,5 +1,5 @@
 import { Components, Helper, SPTypes } from "gd-sprest-bs";
-import { CanvasForm, LoadingDialog } from "./common";
+import { CanvasForm, LoadingDialog, Modal } from "./common";
 
 /**
  * Item Form
@@ -11,6 +11,7 @@ class _ItemForm {
     private _onCreateViewForm: (props: Components.IListFormDisplayProps) => Components.IListFormDisplayProps;
     private _onSave: (values: any) => any;
     private _updateEvent: Function = null;
+    private _useModal: boolean = false;
 
     // The current form being displayed
     get form(): Components.IListFormDisplay | Components.IListFormEdit { return this._displayForm || this._editForm; }
@@ -24,14 +25,16 @@ class _ItemForm {
 
     // Creates a new task
     create(props?: {
-        onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps,
-        onSave?: (values: any) => any,
-        onUpdate?: (item?: any) => any
+        onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps;
+        onSave?: (values: any) => any;
+        onUpdate?: (item?: any) => any;
+        useModal?: boolean;
     }) {
-        // Set the events
+        // Set the properties
         this._onCreateEditForm = props.onCreateEditForm;
         this._onSave = props.onSave;
         this._updateEvent = props.onUpdate;
+        this._useModal = typeof (props.useModal) === "boolean" ? props.useModal : false;
 
         // Load the item
         this.load(SPTypes.ControlMode.New);
@@ -39,15 +42,17 @@ class _ItemForm {
 
     // Edits a task
     edit(props: {
-        itemId: number,
-        onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps,
-        onSave?: (values: any) => any,
-        onUpdate?: (item?: any) => any
+        itemId: number;
+        onCreateEditForm?: (props: Components.IListFormEditProps) => Components.IListFormEditProps;
+        onSave?: (values: any) => any;
+        onUpdate?: (item?: any) => any;
+        useModal?: boolean;
     }) {
-        // Set the events
+        // Set the properties
         this._onCreateEditForm = props.onCreateEditForm;
         this._onSave = props.onSave;
         this._updateEvent = props.onUpdate;
+        this._useModal = typeof (props.useModal) === "boolean" ? props.useModal : false;
 
         // Load the form
         this.load(SPTypes.ControlMode.Edit, props.itemId);
@@ -55,11 +60,13 @@ class _ItemForm {
 
     // Views the task
     view(props: {
-        itemId: number,
-        onCreateViewForm?: (props: Components.IListFormDisplayProps) => Components.IListFormDisplayProps
+        itemId: number;
+        onCreateViewForm?: (props: Components.IListFormDisplayProps) => Components.IListFormDisplayProps;
+        useModal?: boolean;
     }) {
-        // Set the events
+        // Set the properties
         this._onCreateViewForm = props.onCreateViewForm;
+        this._useModal = typeof (props.useModal) === "boolean" ? props.useModal : false;
 
         // Load the form
         this.load(SPTypes.ControlMode.Display, props.itemId);
@@ -84,7 +91,7 @@ class _ItemForm {
             itemId
         }).then(info => {
             // Set the header
-            CanvasForm.setHeader("<h5>" + (info.item ? info.item.Title : "Create Item") + "</h5>");
+            (this._useModal ? Modal : CanvasForm).setHeader("<h5>" + (info.item ? info.item.Title : "Create Item") + "</h5>");
 
             // Render the form based on the type
             if (mode == SPTypes.ControlMode.Display) {
@@ -100,7 +107,7 @@ class _ItemForm {
                 this._displayForm = Components.ListForm.renderDisplayForm(props);
 
                 // Update the body
-                CanvasForm.setBody(this._displayForm.el);
+                (this._useModal ? Modal : CanvasForm).setBody(this._displayForm.el);
             } else {
                 let isNew = mode == SPTypes.ControlMode.New;
                 let el = document.createElement("div");
@@ -121,7 +128,7 @@ class _ItemForm {
                 let elButton = document.createElement("div");
                 elButton.classList.add("float-end");
                 elButton.classList.add("mt-3");
-                el.appendChild(elButton);
+                this._useModal ? Modal.setFooter(elButton) : el.appendChild(elButton);
                 Components.Button({
                     el: elButton,
                     text: isNew ? "Create" : "Update",
@@ -130,14 +137,14 @@ class _ItemForm {
                 });
 
                 // Update the body
-                CanvasForm.setBody(el);
+                (this._useModal ? Modal : CanvasForm).setBody(el);
             }
 
             // Close the dialog
             LoadingDialog.hide();
 
             // Show the form
-            CanvasForm.show();
+            (this._useModal ? Modal : CanvasForm).show();
         });
     }
 
@@ -163,7 +170,7 @@ class _ItemForm {
                 this._updateEvent ? this._updateEvent(item) : null;
 
                 // Close the dialogs
-                CanvasForm.hide();
+                (this._useModal ? Modal : CanvasForm).hide();
                 LoadingDialog.hide();
             });
         } else {
