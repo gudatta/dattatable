@@ -4,7 +4,7 @@ import { CanvasForm } from "../common";
 /**
  * Filter Item
  */
- export interface IFilterItem {
+export interface IFilterItem {
     header: string;
     items: Components.ICheckboxGroupItem[];
     onFilter?: (value: string) => void;
@@ -90,6 +90,33 @@ export class FilterSlideout {
 
         // Return the item
         return item;
+    }
+
+    // Gets a checkbox group by its name
+    getFilter(key: string): Components.ICheckboxGroup {
+        // Parse the items
+        for (let i = 0; i < this._items.length; i++) {
+            let item = this._items[i];
+
+            // See if this is the target
+            if (item.header == key) {
+                // Return the checkbox
+                return this._cbs[i];
+            }
+        }
+
+        // Not found
+        return null;
+    }
+
+    // Sets a checkbox group filter
+    setFilterValue(key: string, value: string = "") {
+        // Get the filter
+        let filter = this.getFilter(key);
+        if (filter) {
+            // Set the value
+            filter.setValue(value);
+        }
     }
 
     // Shows the filters

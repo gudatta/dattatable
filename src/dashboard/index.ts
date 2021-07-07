@@ -45,6 +45,7 @@ export interface IDashboardProps {
  */
 export class Dashboard {
     private _dt: IDataTable = null;
+    private _filters: FilterSlideout = null;
     private _props: IDashboardProps = null;
 
     // Constructor
@@ -62,7 +63,7 @@ export class Dashboard {
     // Renders the component
     private render() {
         // Create the filters
-        let filters = new FilterSlideout(this._props.filters);
+        this._filters = new FilterSlideout(this._props.filters);
 
         // Render the template
         this._props.el.innerHTML = `
@@ -113,7 +114,7 @@ export class Dashboard {
                 },
                 onShowFilter: () => {
                     // Show the filter
-                    filters.show();
+                    this._filters.show();
                 },
             });
         }
@@ -152,6 +153,9 @@ export class Dashboard {
         this._dt.filter(idx, value);
     }
 
+    // Returns a filter checkbox group by its key
+    getFilter(key: string) { return this._filters.getFilter(key); }
+
     // Refresh the table
     refresh(rows: any[]) {
         // Refresh the table
@@ -163,4 +167,7 @@ export class Dashboard {
         // Search the table
         this._dt.search(value);
     }
+
+    // Sets a filter checkbox group value
+    setFilterValue(key: string, value?: string) { return this._filters.setFilterValue(key, value); }
 }
